@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Northwind Coffee (Tuvio test site)</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <p class="banner">
+    This is a test site for <a href="https://tuvio.dev">Tuvio</a>'s scanner. Its code contains security mistakes
+    on purpose. Nothing here is for sale and no payment is ever taken.
+  </p>
+  <main>
+    <h1>Northwind Coffee</h1>
+    <p class="lede">Small-batch beans, roasted on Tuesdays.</p>
+    <ul class="products" id="products"></ul>
+    <div class="cart">
+      <p>Cart total: <strong id="total">$0.00</strong></p>
+      <button type="button" id="checkout">Checkout</button>
+      <button type="button" id="quick-buy">Quick buy (Stripe)</button>
+      <button type="button" id="save-order">Save order</button>
+      <p id="status" role="status"></p>
+    </div>
+  </main>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
