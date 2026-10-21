@@ -1,0 +1,12 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Northwind Coffee API (Tuvio test site)",
+    "version": "1.0.0",
+    "description": "A deliberately public API description for testing Tuvio's scanner. There is no API behind it."
+  },
+  "paths": {
+    "/api/products": { "get": { "summary": "List products", "responses": { "200": { "description": "OK" } } } },
+    "/api/create-checkout-session": { "post": { "summary": "Start a checkout", "responses": { "200": { "description": "OK" } } } }
+  }
+}
