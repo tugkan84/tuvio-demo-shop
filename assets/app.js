@@ -56,10 +56,33 @@ function quickBuy() {
   });
 }
 
-// A stand-in for supabase-js, so nothing is ever written anywhere.
+// Mistake 4 (database checks, for a verified owner who confirms this backend): a real, throwaway Supabase
+// project with fake data. Its URL and anon key are public by design; what anyone can read with them is up
+// to the tables' Row Level Security. "profiles" is left readable on purpose, "products" is public by design,
+// "orders" is locked.
+const SUPABASE_URL = 'https://qaeynzofqahoembukerh.supabase.co';
+const SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFhZXluem9mcWFob2VtYnVrZXJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MTU2MjcsImV4cCI6MjEwODE5MTYyN30.E42gZRdPxhThSUScA4jYSCrQiyESVWTaWuqi05HDUhc';
+
+// A stand-in for supabase-js (createClient(SUPABASE_URL, SUPABASE_ANON_KEY)), so this page never sends
+// anything anywhere: the scanner reads the code, the browser does not call the database.
 const supabase = {
-  from: () => ({ insert: () => Promise.resolve({ error: { message: 'Test site: no database.' } }) }),
+  url: SUPABASE_URL,
+  key: SUPABASE_ANON_KEY,
+  from: () => ({
+    select: () => Promise.resolve({ data: [], error: null }),
+    insert: () => Promise.resolve({ error: { message: 'Test site: no database.' } }),
+  }),
 };
+
+// The tables this page would read.
+async function loadAccount() {
+  return supabase.from('profiles').select('full_name, email');
+}
+
+async function loadProducts() {
+  return supabase.from('products').select('id, name, price_cents');
+}
 
 // Mistake 3 (site.payments.client-price, table variant): the browser writes the total into the orders table.
 async function saveOrder() {

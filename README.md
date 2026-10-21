@@ -14,4 +14,7 @@ Backend checks for verified owners (probes) also find, on purpose:
 - `/openapi.json`: public API docs
 - `404.html` showing a fake Node.js stack trace: error pages that show code details
 
+Database checks (a verified owner confirms the backend) read a throwaway Supabase project with fake data:
+`profiles` readable by anyone (a `using (true)` policy), `products` public by design, `orders` locked.
+
 Search engines are asked not to index it (robots.txt and a noindex meta tag).
